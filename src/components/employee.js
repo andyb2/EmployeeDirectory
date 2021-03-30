@@ -9,7 +9,7 @@ function Employee() {
     const [order, setOrder] = useState('ascending')
 
     async function getEmployee() {
-        const results = await axios.get("https://randomuser.me/api/?results=15")
+        const results = await axios.get("https://randomuser.me/api/?results=30")
         setData(data => results.data.results)
 
     }
@@ -53,6 +53,9 @@ function Employee() {
             return values.indexOf(searchBarInput.toLowerCase()) !== -1
         }
         )
+        if (searchBarInput === '') {
+            getEmployee()
+        }
         setData(result)
     }
 
@@ -73,7 +76,6 @@ function Employee() {
 
                 {data.map(user => {
                     return (
-                        // <table class="table table-dark table-striped">
                         <tr>
                             <th>
                                 {user.name.first}
