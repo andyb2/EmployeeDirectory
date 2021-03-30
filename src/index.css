@@ -16,3 +16,7 @@ code {
 .tbHeader{
   font-size: 1.5em;
 }
+
+.name:hover {
+  cursor: pointer;
+}
