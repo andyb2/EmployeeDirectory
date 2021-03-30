@@ -1,52 +1,68 @@
 
 import { useEffect, useState, } from 'react'
 import axios from 'axios'
+import Search from './search'
 
 function Employee() {
 
     const [data, setData] = useState([])
-    // const [search, setSearch] = useState([])
-
+    const [order, setOrder] = useState('ascending')
 
     async function getEmployee() {
         const results = await axios.get("https://randomuser.me/api/?results=15")
         setData(data => results.data.results)
-        console.log(results.data.results)
+
     }
 
-    console.log(data)
     useEffect(function () {
-        console.log('please work')
         getEmployee()
-
     }, [])
 
-    // sorting function needs work
-
     function ascendingSort() {
-        console.log('please work')
-        const aSort = data.name.sort();
-        console.log(aSort)
+        console.log(data)
+        let filtereddata = [...data]
+        console.log(filtereddata)
+        const sortedEmployees = filtereddata.sort((a, b) => {
+            if (b.name.first > a.name.first) {
+                console.log()
+                return -1
+            }
+            if (a.name.first > b.name.first) {
+                return 1
+            }
+            return 0
+        });
+        if (order === 'descending') {
+            sortedEmployees.reverse()
+            setOrder("ascending")
+        }
+        else {
+            setOrder("descending")
+        }
+        setData(sortedEmployees)
+
     }
 
-    // NEEDS WORK.... SEARCH FUNCTION 
+    function employeeSearch(event) {
+        event.preventDefault();
+        let filtereddata = [...data]
+        const searchBarInput = event.target.value;
 
-    // function employeeSearch(event) {
-    //     event.preventDefault();
-    //     if (event.target.name === 'search') {
-    //         const searchBarInput = event.target.value.toLowerCase();
-    //         const result = data.filter(input => input === searchBarInput)
-    //         console.log(result)
-    //     }
-    // }
+        const result = filtereddata.filter(input => {
+            let values = Object.values(input).join('').toLowerCase();
+            return values.indexOf(searchBarInput.toLowerCase()) !== -1
+        }
+        )
+        setData(result)
+    }
 
     return (
-        // onClick={sortByName}
         <div className="container">
+            <Search employeeSearch={employeeSearch} />
             <table className="table table-dark table-striped tableHeader">
                 <thead>
                     <tr className="tbHeader">
-                        <th onclick={ascendingSort}>Name</th>
+                        <th class="name" onClick={ascendingSort} >Name</th>
                         <th>Image</th>
                         <th>Email</th>
                         <th>City</th>
@@ -74,16 +90,11 @@ function Employee() {
                             </th>
                             <th>{user.phone}</th>
                         </tr>
-                        // </table>
                     )
                 })}
-
             </table>
         </div>
     )
-
 }
-
-
 
 export default Employee
