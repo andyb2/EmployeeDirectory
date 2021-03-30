@@ -19,4 +19,5 @@ code {
 
 .name:hover {
   cursor: pointer;
+  background-color: rgb(165, 165, 165);
 }
