@@ -5,6 +5,7 @@ import axios from 'axios'
 function Employee() {
 
     const [data, setData] = useState([])
+    // const [search, setSearch] = useState([])
 
 
     async function getEmployee() {
@@ -20,13 +21,32 @@ function Employee() {
 
     }, [])
 
+    // sorting function needs work
+
+    function ascendingSort() {
+        console.log('please work')
+        const aSort = data.name.sort();
+        console.log(aSort)
+    }
+
+    // NEEDS WORK.... SEARCH FUNCTION 
+
+    // function employeeSearch(event) {
+    //     event.preventDefault();
+    //     if (event.target.name === 'search') {
+    //         const searchBarInput = event.target.value.toLowerCase();
+    //         const result = data.filter(input => input === searchBarInput)
+    //         console.log(result)
+    //     }
+    // }
+
     return (
         // onClick={sortByName}
         <div className="container">
             <table className="table table-dark table-striped tableHeader">
                 <thead>
                     <tr className="tbHeader">
-                        <th>Name</th>
+                        <th onclick={ascendingSort}>Name</th>
                         <th>Image</th>
                         <th>Email</th>
                         <th>City</th>
@@ -45,7 +65,7 @@ function Employee() {
                                 {user.name.last}
                             </th>
 
-                            <th><img src={user.picture.medium}></img></th>
+                            <th><img src={user.picture.medium} alt="employee photos"></img></th>
                             <th>{user.email}</th>
                             <th>
                                 {user.location.city},

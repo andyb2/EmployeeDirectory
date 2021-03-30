@@ -1,12 +1,17 @@
 
 import './App.css';
 import Employee from './components/employee';
+import Search from './components/search.js';
+
 
 
 
 function App() {
   return (
-    <Employee />
+    <>
+      <Search />
+      <Employee />
+    </>
   );
 }
 
