@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import Search from './Search'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Search from './search';
 
 const Employee = () => {
     const [data, setData] = useState({});
