@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Search = ({ employees }) => {
     const { data, setData } = employees;
     const handleChange = (e) => {
@@ -12,7 +11,7 @@ const Search = ({ employees }) => {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{ paddingTop: '1rem' }}>
             <form>
                 <div className="form-group search-widget">
                     <div className="input-group mb-3">
